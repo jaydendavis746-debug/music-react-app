@@ -6,27 +6,40 @@ function App() {
   const [btnText, setBtnText] = useState('click to like !')
   const [InputText, setInputText] = useState('')
   
+  const [songs, setSongs] = useState([{name: "Eraser", liked: false}, 
+    {name: "Castle on the hill", liked: false}, 
+    {name: "Dive", liked: false}, 
+    {name: "Shape of you", liked: false}, 
+    {name: "Perfect", liked: false},
+    {name: "Galway Girl", liked: true},
+    {name: "Happier", liked: false},
+    {name: "New Man", liked: false},
+    {name: "Hearts Don't Break Around Here", liked: false},
+    {name: "What Do I Know", liked: false},
+    {name: "How Would You Feel", liked: false},
+    {name: "Supermarket Flowers", liked: false}
+  ])
+  // const handleText = (e)=>{
+  //   setInputText(e.target.value)
+  // }
 
-  const handleText = (e)=>{
-    setInputText(e.target.value)
-  }
+  // const handleSubmit = (e)=>{
+  //   e.preventDefault()
 
-  const handleSubmit = (e)=>{
-    e.preventDefault()
+  //   const songList = document.getElementById('songList')
+  //   const song = document.createElement('li')
 
-    const songList = document.getElementById('songList')
-    const song = document.createElement('li')
+  //   song.textContent = InputText
+  //   songList.appendChild(song)
 
-    song.textContent = InputText
-    songList.appendChild(song)
-
-    setInputText('')
-  }
+  //   setInputText('')
+  // }
 
 
-  const updateLike = ()=>{
-    setLike(!like)    
-   like ? setBtnText('Unliked') : setBtnText('Liked')
+  const updateLike = (index) =>{
+    setSongs(songs.map((song, i) => {
+      i === index ? {...songs, liked: !song.liked} : song
+    }))    
   }
 
   return(
@@ -50,25 +63,16 @@ function App() {
       </div>
       <h3>Song List</h3>
       <ul id='songList'>
-        <li>Eraser</li>
-        <li>Catsle on the hill</li>
-        <li>Dive</li>
-        <li>Shape of you</li>
-        <li>Perfect</li>
-        <li>Galway Girl</li>
-        <li>Happier</li>
-        <li>New Man</li>
-        <li>Hearts Don't Break Around Here</li>
-        <li>What Do I Know</li>
-        <li>How Would You Feel</li>
-        <li>Supermarket Flowers </li>
+        {songs.map((song, index) => (
+          <li key={index}>{song.name}<button onClick={updateLike}>{song.liked ? "liked" : "unliked"}</button></li>
+        ))}
       </ul>
     </div>
 
-    <form onSubmit={handleSubmit}>
+    {/* <form onSubmit={handleSubmit}>
       <input type="text" placeholder='Add a song' value={InputText} onChange={handleText} required/>
       <button>Add</button>
-    </form>
+    </form> */}
     </>
 
 
