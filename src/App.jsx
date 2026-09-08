@@ -49,20 +49,7 @@ function App() {
         alt="Divide cover art" />
       </div>
       <h3>Song List</h3>
-      <ul id='songList'>
-        <li>Eraser</li>
-        <li>Catsle on the hill</li>
-        <li>Dive</li>
-        <li>Shape of you</li>
-        <li>Perfect</li>
-        <li>Galway Girl</li>
-        <li>Happier</li>
-        <li>New Man</li>
-        <li>Hearts Don't Break Around Here</li>
-        <li>What Do I Know</li>
-        <li>How Would You Feel</li>
-        <li>Supermarket Flowers </li>
-      </ul>
+      <SongList />
     </div>
 
     <form onSubmit={handleSubmit}>
