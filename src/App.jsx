@@ -38,7 +38,7 @@ function App() {
 
   const updateLike = (index) =>{
     setSongs(songs.map((song, i) => {
-      i === index ? {...songs, liked: !song.liked} : song
+      return i === index ? {...songs, liked: !song.liked} : song
     }))    
   }
 
