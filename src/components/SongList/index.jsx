@@ -1,7 +1,9 @@
 import SongItem from "../SongItem";
 import { Link } from "react-router-dom";
+import { useSong } from "../contexts";
 
-function SongList({songs}) {
+function SongList() {
+    const { songs } = useSong();
 
     return(
         <>
