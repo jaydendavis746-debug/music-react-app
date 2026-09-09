@@ -1,10 +1,12 @@
-import { useState } from 'react'
-import { SongList } from './components'
+import { useState, } from 'react'
+import {Routes, Route, Link} from 'react-router-dom'
+import { SongList, Home } from './components'
+import Nav  from './Nav.jsx'
+import './App.css'
+import SongItem from './components/SongItem/index.jsx'
 
 function App() {
 
-  const [like, setLike]= useState(false)
-  const [btnText, setBtnText] = useState('click to like !')
   const [InputText, setInputText] = useState('')
   const [songs, setSongs] = useState([{name: "Eraser", liked: false},
     {name: "Castle on the hill", liked: false},
@@ -37,38 +39,18 @@ function App() {
   }
 
 
-  const updateLike = ()=>{
-    setLike(!like)    
-   like ? setBtnText('Unliked') : setBtnText('Liked')
-  }
 
   return(
-
-    <div>
-    <h1>Ed Sheeran </h1>
-    <h2>Pop Artist</h2>
-    <p>
-      Edward Christopher Sheeran is an English singer-songwriter. 
-      Born in Halifax, West Yorkshire, and raised in Framlingham, Suffolk, 
-      he began writing songs around the age of eleven. In early 2011, 
-      Sheeran independently released the extended play No.5 Collaborations Project. 
-      He signed with Asylum Records the same year.
-    </p>
-    <div className='albums'>
-      <h2>Latest Album: Divide</h2>
-      <button className='LikeBtn' onClick={updateLike}>{btnText}</button>
-      <div className='AlbumCover'>
-        <img src="../src/assets/divide.png" 
-        alt="Divide cover art" />
-      </div>
-      <h3>Song List</h3>
-      <SongList songs={songs}/>
-    </div>
-
-    <form onSubmit={handleSubmit}>
-      <input type="text" placeholder='Add a song' value={InputText} onChange={handleText} required/>
-      <button>Add</button>
-    </form>
+    <div className='App'>
+      <Nav />
+      <Routes>
+        <Route path='/'  element={<Nav />} />
+          <Route index element={<Home   />} />
+          <Route path='/songlist' >
+            <Route index element={<SongList songs={songs}/>}/>
+            <Route path=':name' element={<SongItem />}/>
+          </Route> 
+      </Routes>
     </div>
 
 
