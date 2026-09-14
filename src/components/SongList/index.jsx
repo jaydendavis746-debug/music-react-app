@@ -1,9 +1,9 @@
 import SongItem from "../SongItem";
 import { Link } from "react-router-dom";
-import { useSong } from "../contexts";
+import { useSelector } from "react-redux";
 
 function SongList() {
-    const { songs } = useSong();
+    const songs = useSelector(state => state.songs);
 
     return(
         <>

@@ -4,7 +4,6 @@ import { SongList, Home, AddSong } from './components'
 import Nav  from './Nav.jsx'
 import './App.css'
 import SongItem from './components/SongItem/index.jsx'
-import { SongProvider } from './components/contexts/index.jsx'
 
 function App() {
   
@@ -12,7 +11,6 @@ function App() {
   return(
     <div className='App'>
       <Nav />
-      <SongProvider>
         <Routes>
           <Route path='/'  element={<Nav />} />
             <Route index element={<Home   />} />
@@ -22,7 +20,6 @@ function App() {
               <Route path=':name' element={<SongItem />}/>
             </Route> 
         </Routes>
-      </SongProvider>
     </div>
 
 

@@ -1,11 +1,15 @@
 import { useEffect, useState, } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { updateLike } from "../../reducers";
+import { useSelector } from "react-redux";
 
 
 function SongItem({}){
 
-  const [like, setLike]= useState(false)
   const [btnText, setBtnText] = useState('click to like !')
+  const dispatch = useDispatch()
+  const songs = useSelector(state => state.songs);
 
   const {name} = useParams()
   const navigate = useNavigate()
@@ -23,10 +27,10 @@ function SongItem({}){
       setLyrics(data.lyrics)
     }
     
-    
-    const updateLike = ()=>{
-      setLike(!like)    
-     like ? setBtnText('Unliked') : setBtnText('Liked')
+    const changeLike = () =>{
+        dispatch(updateLike(name))
+        const liked = songs.filter((song) => song.name === name)[0].liked
+        liked ? setBtnText("Unliked") : setBtnText("Liked")
     }
     
     return(
@@ -34,7 +38,7 @@ function SongItem({}){
         <>
             <h1>{name}: Chorus</h1>
             <p>{lyrics || "No lyrics found"}</p>
-            <button onClick={updateLike}>{btnText}</button>
+            <button onClick={changeLike}>{btnText}</button>
             <button onClick={()=> navigate('/songlist')}>Return to songlist</button>
 
         </>

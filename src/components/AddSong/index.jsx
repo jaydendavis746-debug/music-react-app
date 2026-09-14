@@ -1,10 +1,12 @@
-import { useSong } from "../contexts";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addSong } from "../../reducers";
 
 function AddSong () {
     const [inputText, setInputText] = useState('');
-    const {songs, setSongs} = useSong();
+    const dispatch = useDispatch()
+    
     const navigate = useNavigate();
 
     const handleInput = (e) => {
@@ -13,10 +15,7 @@ function AddSong () {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setSongs([
-        ...songs,
-        {name: inputText, liked: false}
-        ])
+        dispatch(addSong(inputText))
         setInputText('')
         navigate("/songlist")
     }
